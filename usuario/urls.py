@@ -4,5 +4,5 @@ from . import views
 #Establecer vistas y url correspondiente
 app_name = 'usuario'
 urlpatterns = [
-    path('registro', views.RegistroView.as_view(), name = 'registro')
+    path('registro', views.RegistriView.as_view(), name = 'registro')
 ]
