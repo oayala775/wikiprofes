@@ -1,0 +1,64 @@
+{%extends "base.html" %}
+
+{% block title %}
+<title>Registro</title>
+{% endblock title %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <h1>Registra tu usuario</h1>
+        {% for error in form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
+        {% endfor %}
+        <form method="post"> <!--post porque enviaremos información-->
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="username-id" class="form-label">Usuarios</label>
+              <input 
+              type="text" 
+              class="form-control" 
+              id="username-id" 
+              name="username"
+              {% if form.errors %}
+              value="{{form.username.value}}"
+              {% endif %}
+              >
+              {% for error in form.username.errors %}
+              <p style="color: hotpink;">{{error}}</p>
+              {% endfor %}
+            </div>
+            <div class="mb-3">
+                <label for="email-id" class="form-label">Correo</label>
+                <input 
+                type="email" 
+                class="form-control" 
+                id="email-id" 
+                name="email"
+                {% if form.errors %}
+                value="{{form.email.value}}"
+                {% endif %}
+                >
+                {% for error in form.email.errors %}
+                <p style="color: hotpink;">{{error}}</p>
+                {% endfor %}
+              </div>
+            <div class="mb-3">
+              <label for="password-id" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="password-id" name="password">
+            </div>
+            <div class="mb-3">
+                <label for="password2-id" class="form-label">Confirma tu ontraseña</label>
+                <input type="password" class="form-control" id="password2-id" name="password2">
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="reset" class="btn btn-secundary">Limpiar</button>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+          </form>
+    </div>
+</section>
+
+{% endblock content %}
