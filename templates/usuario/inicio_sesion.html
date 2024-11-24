@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+<div style="margin-top: 20px;">
+  <a href="javascript:history.back()" class="btn btn-secondary mb-3" style="margin: 20px; margin-top: 20px">Regresar</a>
+  <title>Iniciar Sesion</title>
+</div>
+{% endblock title %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <h1>Iniciar Sesion</h1>
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            Las credenciales no coinciden
+        </div>          
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="nombre_usuario-id" class="form-label">Nombre de usuario</label>
+              <input 
+              type="text" 
+              class="form-control" 
+              id="nombre_usuario-id" 
+              name="username"
+              {% if form.errors %}
+                value="{{form.username.value}}"
+              {% endif %}
+              >
+            </div>
+            <div class="mb-3">
+              <label for="contra-id" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="contra-id" name="password">
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="submit" class="btn btn-primary">Enviar</button>
+              <button type="reset" class="btn btn-secondary">Reiniciar</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock content %}

@@ -1,64 +1,66 @@
-{%extends "base.html" %}
+{% extends "base.html" %}
 
 {% block title %}
-<title>Registro</title>
+<div style="margin-top: 20px;">
+  <a href="javascript:history.back()" class="btn btn-secondary mb-3" style="margin: 20px; margin-top: 20px">Regresar</a>
+  <title>Registro</title>
+</div>
 {% endblock title %}
 
 {% block content %}
 <section>
     <div class="container">
-        <h1>Registra tu usuario</h1>
+        <h1>Registro</h1>
         {% for error in form.non_field_errors %}
         <div class="alert alert-danger" role="alert">
             {{error}}
-        </div>
+        </div>          
         {% endfor %}
-        <form method="post"> <!--post porque enviaremos información-->
+        <form method="post">
             {% csrf_token %}
             <div class="mb-3">
-              <label for="username-id" class="form-label">Usuarios</label>
+              <label for="nombre_usuario-id" class="form-label">Nombre de usuario</label>
               <input 
               type="text" 
               class="form-control" 
-              id="username-id" 
-              name="username"
+              id="nombre_usuario-id" 
+              name="nombre_usuario"
               {% if form.errors %}
-              value="{{form.username.value}}"
+                value="{{form.nombre_usuario.value}}"
               {% endif %}
               >
-              {% for error in form.username.errors %}
-              <p style="color: hotpink;">{{error}}</p>
+              {% for error in form.nombre_usuario.errors %}
+              <p style="color: #ff5555">{{error}}</p>
               {% endfor %}
             </div>
             <div class="mb-3">
-                <label for="email-id" class="form-label">Correo</label>
-                <input 
-                type="email" 
-                class="form-control" 
-                id="email-id" 
-                name="email"
-                {% if form.errors %}
-                value="{{form.email.value}}"
-                {% endif %}
-                >
-                {% for error in form.email.errors %}
-                <p style="color: hotpink;">{{error}}</p>
-                {% endfor %}
-              </div>
-            <div class="mb-3">
-              <label for="password-id" class="form-label">Contraseña</label>
-              <input type="password" class="form-control" id="password-id" name="password">
+              <label for="correo-id" class="form-label">Correo</label>
+              <input 
+              type="email" 
+              class="form-control" 
+              id="correo-id" 
+              name="correo"
+              {% if form.errors %}
+                value="{{form.correo.value}}"
+              {% endif %}
+              >
+              {% for error in form.correo.errors %}
+              <p style="color: #ff5555">{{error}}</p>
+              {% endfor %}
             </div>
             <div class="mb-3">
-                <label for="password2-id" class="form-label">Confirma tu ontraseña</label>
-                <input type="password" class="form-control" id="password2-id" name="password2">
+              <label for="contra-id" class="form-label">Contraseña</label>
+              <input type="password" class="form-control" id="contra-id" name="contra">
+            </div>
+            <div class="mb-3">
+              <label for="confirmacion-id" class="form-label">Confirmación de contraseña</label>
+              <input type="password" class="form-control" id="confirmacion-id" name="confirmacion">
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="reset" class="btn btn-secundary">Limpiar</button>
-                <button type="submit" class="btn btn-primary">Enviar</button>
+              <button type="submit" class="btn btn-primary">Enviar</button>
+              <button type="reset" class="btn btn-secondary">Reiniciar</button>
             </div>
-          </form>
+        </form>
     </div>
 </section>
-
 {% endblock content %}
