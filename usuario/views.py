@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.views import generic
 from django.urls import reverse_lazy
 from .forms import RegistroFrom
+from django.contrib.auth import views
 
 # enlace entre html y el back-end
 class RegistriView(generic.FormView):
@@ -20,3 +21,8 @@ class RegistriView(generic.FormView):
         usuario = form.save()
         #el usuario será utilizado para el login en el futuro
         return super().form_valid(form)
+    
+class InicioView(views.LoginView):
+    template_name = 'usuario/inicio_sesion.html'
+    redirect_authenticated_user = True
+    next_page = 'publicacion:index'
