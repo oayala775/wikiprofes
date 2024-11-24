@@ -9,7 +9,7 @@ from .forms import RegistroFrom
 class RegistriView(generic.FormView):
     template_name = 'usuario/registro.html'
     form_class = RegistroFrom
-    success_url = reverse_lazy('usuario:registro') #cambiar a pagina de inicio del sistema
+    success_url = reverse_lazy('publicacion:index') #cambiar a pagina de inicio del sistema
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
