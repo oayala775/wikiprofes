@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Detalle de {{ materia.nombre }}</title>
+{% endblock titulo %}
+
+{% block content %}
+<div class="container mt-4">
+    <a href="{% url 'ver_materias' %}" class="btn btn-secondary mb-3">Regresar</a> <!-- Botón de regresar -->
+    <h1>{{ materia.nombre }}</h1>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">{{ materia.nombre }}</h5>
+            <p class="card-text"><strong>Clave:</strong> {{ materia.clave }}</p>
+            <p class="card-text"><strong>Departamento:</strong> {{ materia.departamento }}</p>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h3>Profesores que imparten esta materia</h3>
+        <ul class="list-group">
+            {% for profesor in profesores %}
+            <li class="list-group-item">
+                <a href="{% url 'detalle_profesor' profesor.id %}">{{ profesor.nombre }}</a>
+            </li>
+            {% empty %}
+            <li class="list-group-item">No hay profesores asignados a esta materia.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="mt-4">
+        <h3>Reseñas</h3>
+        {% for reseña in reseñas %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ reseña.titulo }}</h5>
+                <p class="card-text">{{ reseña.comentario }}</p>
+                <p class="card-text"><small class="text-muted">Fecha: {{ reseña.fecha }}</small></p>
+                <p class="card-text"><small class="text-muted">Dominio: {{ reseña.dominio }}</small></p>
+                <p class="card-text"><small class="text-muted">Puntualidad: {{ reseña.puntualidad }}</small></p>
+                <p class="card-text"><small class="text-muted">Asistencia: {{ reseña.asistencia }}</small></p>
+                <p class="card-text"><small class="text-muted">Dificultad: {{ reseña.dificultad }}</small></p>
+                <p class="card-text"><small class="text-muted">Seguimiento: {{ reseña.seguimiento }}</small></p>
+            </div>
+        </div>
+        {% empty %}
+        <p>No hay reseñas para esta materia.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
