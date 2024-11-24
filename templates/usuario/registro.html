@@ -19,7 +19,7 @@
         <form method="post">
             {% csrf_token %}
             <div class="mb-3">
-              <label for="nombre_usuario-id" class="form-label">Nombre de usuario</label>
+              <label for="username-id" class="form-label">Nombre de usuario</label>
               <input 
               type="text" 
               class="form-control" 
@@ -53,8 +53,8 @@
               <input type="password" class="form-control" id="contra-id" name="contra">
             </div>
             <div class="mb-3">
-              <label for="confirmacion-id" class="form-label">Confirmación de contraseña</label>
-              <input type="password" class="form-control" id="confirmacion-id" name="confirmacion">
+                <label for="password2-id" class="form-label">Confirma tu contraseña</label>
+                <input type="password" class="form-control" id="password2-id" name="password2">
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
               <button type="submit" class="btn btn-primary">Enviar</button>
