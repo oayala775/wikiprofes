@@ -29,4 +29,8 @@ class InicioView(views.LoginView):
     next_page = 'publicacion:index'
 
 
-    
+def logout_user(request):
+    print("logout called")
+    logout(request)
+    messages.success(request, "Se ha cerrado sesión correctamente")
+    return redirect('publicacion:index')
