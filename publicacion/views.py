@@ -8,3 +8,9 @@ class PublicacionView(generic.ListView):
 
     def get_queryset(self):
         return Publicacion.objects.order_by('-fecha')[:5]
+
+class ProfesorView(generic.ListView):
+    template_name = "publicacion/profesor.html"
+
+    def get_queryset(self):
+        return Publicacion.objects.filter(profesor_id=self.kwargs["profesor_id"])
