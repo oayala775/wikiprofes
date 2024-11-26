@@ -63,3 +63,10 @@ class ProfesorView(generic.ListView):
         context["promedio_general"] = "%.1f" % (sumatoria / len(publicaciones))
         return context
 
+
+
+class MateriaView(generic.ListView):
+    template_name = "publicacion/materia.html"
+
+    def get_queryset(self):
+        return Publicacion.objects.filter(materia_id=self.kwargs["materia_id"])
