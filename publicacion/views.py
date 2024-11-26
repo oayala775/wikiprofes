@@ -14,3 +14,9 @@ class ProfesorView(generic.ListView):
 
     def get_queryset(self):
         return Publicacion.objects.filter(profesor_id=self.kwargs["profesor_id"])
+
+class MateriaView(generic.ListView):
+    template_name = "publicacion/materia.html"
+
+    def get_queryset(self):
+        return Publicacion.objects.filter(materia_id=self.kwargs["materia_id"])

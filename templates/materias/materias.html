@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}
+<title>Materias</title>
+{% endblock title %}
+{% block content %}
+    <div class="container mt-5">
+        <h1>Todas las Materias</h1>
+        {% for materia in materia_list %}
+            <section>
+                <div class="container">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{materia.nombre}}</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary text-end">{{materia.clave}}</h6>
+                        </div>
+                        <div class="card-footer text-body-secondary">
+                            <a href="{% url 'publicacion:materia' materia.id%}">Ver materia</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+    </div>
+{% endblock content %}
+
