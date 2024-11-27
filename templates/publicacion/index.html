@@ -17,8 +17,13 @@
                 <div class="card-footer text-body-secondary text-end">
                     Por {{publicacion.usuario}}. {{publicacion.fecha}}
                   </div>
-            </div>
+            </div>  
         </div>
     </section>
     {% endfor %}
+    {% if user.is_authenticated %}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: 20px; margin: 20px; width: 30rem">
+        <a href="/crear_reseña" class="btn btn-primary mb-3">Agregar Reseña</a>
+    </div>
+    {% endif %}
 {% endblock content %}
