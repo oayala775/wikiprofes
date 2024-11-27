@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}
+<title>Profesores</title>
+{% endblock title %}
+{% block content %}
+    <div class="container mt-5">
+        <h1>Todos los profesores</h1>
+        {% for profesor in profesor_list %}
+            <section>
+                <div class="container">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{profesor.nombre}}</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary text-end">{{profesor.id}}</h6>
+                        </div>
+                        <div class="card-footer text-body-secondary">
+                            <a href="{% url 'publicacion:profesor' profesor.id%}">Ver perfil</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endfor %}
+    </div>
+{% endblock content %}
+

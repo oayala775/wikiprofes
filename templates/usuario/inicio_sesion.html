@@ -5,8 +5,9 @@
 {% endblock title %}
 
 {% block content %}
+
 <section>
-    <div class="container">
+    <div class="container mt-5">
         <h1>Inicio Sesión</h1>
         {% if form.errors %}
         <div class="alert alert-danger" role="alert">
@@ -32,10 +33,13 @@
               <input type="password" class="form-control" id="password-id" name="password">
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="reset" class="btn btn-secundary">Limpiar</button>
+                <button type="reset" class="btn btn-secondary">Limpiar</button>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </div>
-          </form>
+        </form>
+    </div>
+    <div class="container text-center mt-2">
+      <p>Si aún no estás registrado <a href="/registro">Regístrate</a></p>
     </div>
 </section>
 

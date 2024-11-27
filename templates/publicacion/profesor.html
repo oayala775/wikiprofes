@@ -3,14 +3,14 @@
 <title>Sobre {{publicacion_list.0.profesor}}</title>
 {% endblock titulo %}
 {% block content %}
-    <a href="javascript:history.back()" class="btn btn-secondary mb-3" style="margin: 20px; margin-top: 20px">Regresar</a>
-    <h1 style="margin: 20px;">Sobre {{publicacion_list.0.profesor}}</h1>
+    <h1 class="m-5">Sobre {{publicacion_list.0.profesor}}</h1>
     {% for publicacion in publicacion_list %}
     <section>
         <div class="container">
             <div class="card mb-3">
                 <div class="card-body">
                   <h5 class="card-title">{{publicacion.titulo}}</h5>
+                  <h6 class="card-subtitle mb-2 text-body-secondary text-end">Sobre {{publicacion.profesor}}</h6>
                   <p class="card-text">{{publicacion.comentario}}</p>
                 </div>
                 <div class="card-footer text-body-secondary text-end">
