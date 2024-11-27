@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class PublicacionForm(forms.ModelForm):
     class Meta:
         model = Publicacion
-        fields = ['usuario', 'profesor', 'materia', 'titulo', 'fecha', 'comentario', 'dominio', 'puntualidad', 'asistencia', 'dificultad', 'seguimiento']
+        fields = ['profesor', 'materia', 'titulo', 'fecha', 'comentario', 'dominio', 'puntualidad', 'asistencia', 'dificultad', 'seguimiento']
         widgets = {
             'fecha': forms.DateInput(attrs={'type': 'date'}),
             'comentario': forms.Textarea(attrs={'rows': 3}),

@@ -51,12 +51,15 @@ class PublicacionCreateView(View):
     def post(self, request, *args, **kwargs):
         form = PublicacionForm(request.POST)
         if form.is_valid():
-            form.save()
+            publicacion = form.save(commit=False)  # No guardes inmediatamente
+            publicacion.usuario = request.user  # Asigna el usuario actual
+            publicacion.save()  # Ahora guarda
             return redirect('publicacion:index')
+        # En caso de error, vuelve a renderizar el formulario
         usuarios = User.objects.all()
         profesores = Profesor.objects.all()
         materias = Materia.objects.all()
-        usuario_actual = request.user  # Usuario autenticado
+        usuario_actual = request.user
         return render(request, 'publicacion/publicacion_form.html', {
             'form': form,
             'usuarios': usuarios,
