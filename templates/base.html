@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" href="/materias">Materias</a>
-                    <a class="nav-link" href="/">Profesores</a>
+                    <a class="nav-link" href="/profesores">Profesores</a>
                     <a class="nav-link" href="/">Publicaciones</a>
                     {% if user.is_authenticated %}
                     <a class="nav-link" href="/logout">Cerrar Sesión</a>
@@ -28,6 +28,10 @@
                     <a class="nav-link" href="/inicio">Iniciar Sesión</a>
                     <a class="nav-link" href="/registro">Regístrate</a>
                     {% endif %}
+                    <form class="d-flex" role="search" method="get" action="{% url 'publicacion:busqueda' materia_nombre='materia_nombre' %}">
+                        <input class="form-control me-2" type="search" name="materia_nombre" placeholder="Buscar materia" aria-label="Search">
+                        <button class="btn btn-light" type="submit">Buscar</button>
+                    </form>
                 </div>
             </div>
         </div>

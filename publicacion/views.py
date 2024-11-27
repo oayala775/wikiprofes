@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.views import generic
 from .models import Publicacion
+from .models import Materia
 from django.db.models import Avg
-
 
 # Create your views here.
 class PublicacionView(generic.ListView):
@@ -63,8 +63,6 @@ class ProfesorView(generic.ListView):
         context["promedio_general"] = "%.1f" % (sumatoria / len(publicaciones))
         return context
 
-
-
 class MateriaView(generic.ListView):
     template_name = "publicacion/materia.html"
 
@@ -76,3 +74,14 @@ class MateriaView(generic.ListView):
 
     def get_queryset(self):
         return Publicacion.objects.filter(materia_id=self.kwargs["materia_id"])
+    
+class BusquedaView(generic.ListView):
+    model = Materia
+    template_name = "publicacion/busqueda.html"
+    context_object_name = "materia_list"
+
+    def get_queryset(self):
+        materia_nombre = self.request.GET.get("materia_nombre", "")
+        if materia_nombre:
+            return Materia.objects.filter(nombre__icontains=materia_nombre)
+        return Materia.objects.none() 

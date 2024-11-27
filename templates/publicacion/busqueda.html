@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Resultados de Búsqueda</title>
+{% endblock titulo %}
+
+{% block content %}
+    <h1 class="m-5">Resultados de la búsqueda</h1>
+
+    {% if materia_list %}
+        <div class="container mt-5">
+            {% for materia in materia_list %}
+                <section>
+                    <div class="container">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">{{materia.nombre}}</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary text-end">{{materia.clave}}</h6>
+                            </div>
+                            <div class="card-footer text-body-secondary">
+                                <a href="{% url 'publicacion:materia' materia.id%}">Ver materia</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">No se encontraron materias para tu búsqueda.</p>
+    {% endif %}
+{% endblock content %}
