@@ -1,7 +1,18 @@
 #vamos a recibir y validar los datos que vienen del front
 from typing import Any
 from django import forms
+from .models import Publicacion
 from django.contrib.auth.models import User
+
+class PublicacionForm(forms.ModelForm):
+    class Meta:
+        model = Publicacion
+        fields = ['usuario', 'profesor', 'materia', 'titulo', 'fecha', 'comentario', 'dominio', 'puntualidad', 'asistencia', 'dificultad', 'seguimiento']
+        widgets = {
+            'fecha': forms.DateInput(attrs={'type': 'date'}),
+            'comentario': forms.Textarea(attrs={'rows': 3}),
+        }
+
 
 class RegistroFrom(forms.Form):
     #variables en las que recibiremos datos del front
@@ -13,12 +24,12 @@ class RegistroFrom(forms.Form):
     #validar usuarios
     def clean_username(self):
          #adquirimos el valor del formulario
-        usuario = self.cleaned_data.get('username')
+        User = self.cleaned_data.get('username')
         #comprobamos que el usuarios no este registrado
-        if User.objects.filter(username = usuario):
+        if User.objects.filter(username = User):
             #mandamos error
             raise forms.ValidationError('Nombre de usuario no disponible')
-        return usuario
+        return User
     
     def clean_email(self):
         correo = self.cleaned_data.get('email')
