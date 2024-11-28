@@ -157,7 +157,7 @@ class PublicacionCreateView(View):
     
 class BusquedaView(generic.ListView):
     model = Materia
-    template_name = "publicacion/busqueda.html"
+    template_name = "publicacion/busqueda_materia.html"
     context_object_name = "materia_list"
 
     def get_queryset(self):
