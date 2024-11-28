@@ -99,6 +99,7 @@
               name="dominio"
               value="{{ form.dominio.value }}"
               max="10"
+              min="0"
               >
               {% for error in form.dominio.errors %}
               <p style="color: #ff5555">{{ error }}</p>
@@ -114,6 +115,7 @@
               name="puntualidad"
               value="{{ form.puntualidad.value }}"
               max="10"
+              min="0"
               >
               {% for error in form.puntualidad.errors %}
               <p style="color: #ff5555">{{ error }}</p>
@@ -129,6 +131,7 @@
               name="asistencia"
               value="{{ form.asistencia.value }}"
               max="10"
+              min="0"
               >
               {% for error in form.asistencia.errors %}
               <p style="color: #ff5555">{{ error }}</p>
@@ -144,6 +147,7 @@
               name="dificultad"
               value="{{ form.dificultad.value }}"
               max="10"
+              min="0"
               >
               {% for error in form.dificultad.errors %}
               <p style="color: #ff5555">{{ error }}</p>
@@ -159,6 +163,7 @@
               name="seguimiento"
               value="{{ form.seguimiento.value }}"
               max="10"
+              min="0"
               >
               {% for error in form.seguimiento.errors %}
               <p style="color: #ff5555">{{ error }}</p>
