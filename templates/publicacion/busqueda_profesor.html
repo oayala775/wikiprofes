@@ -1,20 +1,17 @@
-{% extends "base.html" %} {% block title %}
-<title>Profesores</title>
-{% endblock title %}
+{% extends "base.html" %}
+
+{% block titulo %}
+<title>Resultados de Búsqueda</title>
+{% endblock titulo %}
+
 {% block content %}
-    <div class="container mt-4">
-        <h1>Buscador</h1>
-        <form class="d-flex" style="margin-top: 10px;" role="search" method="get" action="{% url 'publicacion:busqueda_profesor' profesor_nombre='profesor_nombre' %}">
-            <input class="form-control me-2" type="search" name="profesor_nombre" placeholder="Buscar profesor" aria-label="Search">
-            <button class="btn btn-light" type="submit">Buscar</button>
-        </form>
-        <div class="container mt-4">
-            <h1>Todos los Profesores</h1>
-        </div>
-        <div class="row row-cols-1 row-cols-md-4 g-4">
+    <h1 class="m-5">Resultados de la búsqueda</h1>
+
+    {% if profesor_list %}
+        <div class="container mt-5">
             {% for profesor in profesor_list %}
                 <section>
-                    <div class="col">
+                    <div class="container">
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">{{profesor.nombre}}</h5>
@@ -28,6 +25,7 @@
                 </section>
             {% endfor %}
         </div>
-    </div>
+    {% else %}
+        <p class="text-center">No se encontraron materias para tu búsqueda.</p>
+    {% endif %}
 {% endblock content %}
-

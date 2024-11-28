@@ -5,25 +5,30 @@
 {% endblock title %}
 
 {% block content %}
-    {% for publicacion in publicacion_list %}
-    <section>
-        <div class="container mt-5">
-            <div class="card mb-3" style="width: 54rem;">
-                <div class="card-body">
-                  <h5 class="card-title">{{publicacion.titulo}}</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary text-end">sobre  <a href="{% url 'publicacion:profesor' publicacion.profesor.id %}">{{publicacion.profesor}}</a></h6>
-                  <p class="card-text">{{publicacion.comentario}}</p>
-                </div>
-                <div class="card-footer text-body-secondary text-end">
-                    Por {{publicacion.usuario}}. {{publicacion.fecha}}
-                  </div>
-            </div>  
-        </div>
-    </section>
-    {% endfor %}
-    {% if user.is_authenticated %}
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-top: 20px; margin: 20px; width: 30rem">
-        <a href="/crear_reseña" class="btn btn-primary mb-3">Agregar Reseña</a>
+    <div class="container mt-4">
+        <h1>Reseñas más recientes</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for publicacion in publicacion_list %}
+                <section>
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                            <h5 class="card-title">{{publicacion.titulo}}</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary text-end">sobre  <a href="{% url 'publicacion:profesor' publicacion.profesor.id %}">{{publicacion.profesor}}</a></h6>
+                            <p class="card-text">{{publicacion.comentario}}</p>
+                            </div>
+                            <div class="card-footer text-body-secondary text-end">
+                                Por {{publicacion.usuario}}. {{publicacion.fecha}}
+                            </div>
+                        </div>  
+                    </div>
+                </section>
+            {% endfor %}
+        </div> 
+        {% if user.is_authenticated %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a href="/crear_reseña" class="btn btn-primary mb-3">Agregar Reseña</a>
+            </div>
+        {% endif %}
     </div>
-    {% endif %}
 {% endblock content %}

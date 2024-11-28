@@ -72,11 +72,56 @@ class ProfesorView(generic.ListView):
         return context
 
 class MateriaView(generic.ListView):
+    model = Materia
     template_name = "publicacion/materia.html"
+    context_object_name = "materia_list"
+
+    def get_queryset(self):
+        return Materia.objects.filter(id=self.kwargs["materia_id"]) 
+
+    def get_context_data(self, **kwargs): 
+        context = super().get_context_data(**kwargs) 
+        context['publicacion_list'] = Publicacion.objects.filter(materia_id=self.kwargs["materia_id"]) 
+        return context
+
+class PublicacionCreateView(View):
+    def get(self, request, *args, **kwargs):
+        form = PublicacionForm()
+        usuarios = User.objects.all()
+        profesores = Profesor.objects.all()
+        materias = Materia.objects.all()
+        usuario_actual = request.user  # Usuario autenticado
+        return render(request, 'publicacion/publicacion_form.html', {
+            'form': form,
+            'usuarios': usuarios,
+            'profesores': profesores,
+            'materias': materias,
+            'usuario_actual': usuario_actual,
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = PublicacionForm(request.POST)
+        if form.is_valid():
+            publicacion = form.save(commit=False)  # No guardes inmediatamente
+            publicacion.usuario = request.user  # Asigna el usuario actual
+            publicacion.save()  # Ahora guarda
+            return redirect('publicacion:index')
+        # En caso de error, vuelve a renderizar el formulario
+        usuarios = User.objects.all()
+        profesores = Profesor.objects.all()
+        materias = Materia.objects.all()
+        usuario_actual = request.user
+        return render(request, 'publicacion/publicacion_form.html', {
+            'form': form,
+            'usuarios': usuarios,
+            'profesores': profesores,
+            'materias': materias,
+            'usuario_actual': usuario_actual,
+        })
 
     def get_queryset(self):
         return Publicacion.objects.filter(materia_id=self.kwargs["materia_id"])
-    
+
 
 class PublicacionCreateView(View):
     def get(self, request, *args, **kwargs):
@@ -116,46 +161,7 @@ class PublicacionCreateView(View):
     def get_queryset(self):
         return Publicacion.objects.filter(materia_id=self.kwargs["materia_id"])
     
-
-class PublicacionCreateView(View):
-    def get(self, request, *args, **kwargs):
-        form = PublicacionForm()
-        usuarios = User.objects.all()
-        profesores = Profesor.objects.all()
-        materias = Materia.objects.all()
-        usuario_actual = request.user  # Usuario autenticado
-        return render(request, 'publicacion/publicacion_form.html', {
-            'form': form,
-            'usuarios': usuarios,
-            'profesores': profesores,
-            'materias': materias,
-            'usuario_actual': usuario_actual,
-        })
-
-    def post(self, request, *args, **kwargs):
-        form = PublicacionForm(request.POST)
-        if form.is_valid():
-            publicacion = form.save(commit=False)  # No guardes inmediatamente
-            publicacion.usuario = request.user  # Asigna el usuario actual
-            publicacion.save()  # Ahora guarda
-            return redirect('publicacion:index')
-        # En caso de error, vuelve a renderizar el formulario
-        usuarios = User.objects.all()
-        profesores = Profesor.objects.all()
-        materias = Materia.objects.all()
-        usuario_actual = request.user
-        return render(request, 'publicacion/publicacion_form.html', {
-            'form': form,
-            'usuarios': usuarios,
-            'profesores': profesores,
-            'materias': materias,
-            'usuario_actual': usuario_actual,
-        })
-
-    def get_queryset(self):
-        return Publicacion.objects.filter(materia_id=self.kwargs["materia_id"])
-    
-class BusquedaView(generic.ListView):
+class BusquedaMateriaView(generic.ListView):
     model = Materia
     template_name = "publicacion/busqueda_materia.html"
     context_object_name = "materia_list"
@@ -165,3 +171,14 @@ class BusquedaView(generic.ListView):
         if materia_nombre:
             return Materia.objects.filter(nombre__icontains=materia_nombre)
         return Materia.objects.none() 
+    
+class BusquedaProfesorView(generic.ListView):
+    model = Profesor
+    template_name = "publicacion/busqueda_profesor.html"
+    context_object_name = "profesor_list"
+
+    def get_queryset(self):
+        profesor_nombre = self.request.GET.get("profesor_nombre", "")
+        if profesor_nombre:
+            return Profesor.objects.filter(nombre__icontains=profesor_nombre)
+        return Profesor.objects.none() 

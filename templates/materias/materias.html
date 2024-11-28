@@ -3,27 +3,32 @@
 {% endblock title %}
 {% block content %}
 
-    <div class="container mt-5">
-        <form class="d-flex" role="search" method="get" action="{% url 'publicacion:busqueda_materia' materia_nombre='materia_nombre' %}">
+    <div class="container mt-4">
+        <h1>Buscador</h1>
+        <form class="d-flex" style="margin-top: 10px;" role="search" method="get" action="{% url 'publicacion:busqueda_materia' materia_nombre='materia_nombre' %}">
             <input class="form-control me-2" type="search" name="materia_nombre" placeholder="Buscar materia" aria-label="Search">
             <button class="btn btn-light" type="submit">Buscar</button>
         </form>
-        <h1>Todas las Materias</h1>
-        {% for materia in materia_list %}
-            <section>
-                <div class="container">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">{{materia.nombre}}</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary text-end">{{materia.clave}}</h6>
-                        </div>
-                        <div class="card-footer text-body-secondary">
-                            <a href="{% url 'publicacion:materia' materia.id%}">Ver materia</a>
+        <div class="container mt-4">
+            <h1>Todas las Materias</h1>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for materia in materia_list %}
+                <section>
+                    <div class="col">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">{{materia.nombre}}</h5>
+                                <h6 class="card-subtitle mb-2 text-body-secondary text-end">{{materia.clave}}</h6>
+                            </div>
+                            <div class="card-footer text-body-secondary">
+                                <a href="{% url 'publicacion:materia' materia.id%}">Ver materia</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        {% endfor %}
+                </section>
+            {% endfor %}
+        </div>
     </div>
 {% endblock content %}
 

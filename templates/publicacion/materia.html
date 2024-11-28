@@ -1,45 +1,49 @@
 {% extends "base.html" %}
 {% block titulo %}
-<title>Materia {{publicacion_list.0.materia}}</title>
+<title>Materia {{materia_list.0.nombre}}</title>
 {% endblock titulo %}
 {% block content %}
-    <h1 class="m-5">Detalles de la materia {{publicacion_list.0.materia.nombre}}</h1>
+  <div class="container mt-4">
+    <h1>Detalles de la materia "{{materia_list.0.nombre}}"</h1>
 
-    <table class="table table-bordered" style="width: 50%; margin: auto;">
+    <table class="table table-bordered" style="width: 50%; margin: auto; margin-top: 30px;">
         <thead>
         </thead>
         <tbody>
           <tr>
             <th scope="row">Clave</th>
-            <td>{{publicacion_list.0.materia.clave}}</td>
+            <td>{{materia_list.0.clave}}</td>
           </tr>
           <tr>
             <th scope="row">Nombre</th>
-            <td>{{publicacion_list.0.materia.nombre}}</td>
+            <td>{{materia_list.0.nombre}}</td>
           </tr>
           <tr>
             <th scope="row">Departamento</th>
-            <td>{{publicacion_list.0.materia.departamento}}</td>
+            <td>{{materia_list.0.departamento}}</td>
           </tr>
         </tbody>
       </table>
-
-
-    <h1 class="m-5">Publicaciones relacionadas</h1>
-    {% for publicacion in publicacion_list %}
-    <section>
-        <div class="container">
-            <div class="card mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{publicacion.titulo}}</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary text-end">Sobre {{publicacion.profesor}}</h6>
-                  <p class="card-text">{{publicacion.comentario}}</p>
-                </div>
-                <div class="card-footer text-body-secondary text-end">
-                    Por {{publicacion.usuario}}. {{publicacion.fecha}}
+  </div>
+  <div class="container mt-4">
+    <h1>Publicaciones relacionadas</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 10px;">
+        {% for publicacion in publicacion_list %}
+        <section>
+            <div class="col">
+                <div class="card mb-3">
+                    <div class="card-body">
+                      <h5 class="card-title">{{publicacion.titulo}}</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary text-end">Sobre {{publicacion.profesor}}</h6>
+                      <p class="card-text">{{publicacion.comentario}}</p>
+                    </div>
+                    <div class="card-footer text-body-secondary text-end">
+                        Por {{publicacion.usuario}}. {{publicacion.fecha}}
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    {% endfor %}
+        </section>
+        {% endfor %}
+      </div>
+  </div>
 {% endblock content %}

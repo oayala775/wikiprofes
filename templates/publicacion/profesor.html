@@ -3,36 +3,41 @@
 <title>Sobre {{publicacion_list.0.profesor}}</title>
 {% endblock titulo %}
 {% block content %}
-    <h1 class="m-5">Sobre {{publicacion_list.0.profesor}}</h1>
-    <div class="m-5 text-center profesor-metricas">
+<div class="container mt-4">
+    <h1>Sobre {{publicacion_list.0.profesor}}</h1>
+    <div class="profesor-metricas" style="margin: auto; margin-top: 20px;">
         <h2>Metricas</h2>
-        <div class="container promedios">
-            <div class="card" style="width: 18rem;">
+        <div class="container promedios" style="width: 90%; margin: auto; margin-top: 30px;">
                 <ul class="list-group list-group-horizontal">
-                    <li class="list-group-item"> Promedio general {{promedio_general}} </li>
-                    <li class="list-group-item"> Dominio {{promedio_dominio}} </li>
-                    <li class="list-group-item"> Puntualidad {{promedio_puntualidad}} </li>
-                    <li class="list-group-item"> Asistencia {{promedio_asistencia}} </li>
-                    <li class="list-group-item"> Dificultad {{promedio_dificultad}} </li>
-                    <li class="list-group-item"> Seguimiento {{promedio_seguimiento}} </li>
+                    <li class="list-group-item"><strong>Promedio general: </strong>{{promedio_general}} </li>
+                    <li class="list-group-item"><strong>Dominio: </strong>{{promedio_dominio}} </li>
+                    <li class="list-group-item"><strong>Puntualidad: </strong>{{promedio_puntualidad}} </li>
+                    <li class="list-group-item"><strong>Asistencia: </strong>{{promedio_asistencia}} </li>
+                    <li class="list-group-item"><strong>Dificultad: </strong>{{promedio_dificultad}} </li>
+                    <li class="list-group-item"><strong>Seguimiento: </strong>{{promedio_seguimiento}} </li>
                 </ul>
-            </div>
         </div>
     </div>
-    {% for publicacion in publicacion_list %}
-    <section>
-        <div class="container">
-            <div class="card mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">{{publicacion.titulo}}</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary text-end">Sobre {{publicacion.profesor}}</h6>
-                  <p class="card-text">{{publicacion.comentario}}</p>
-                </div>
-                <div class="card-footer text-body-secondary text-end">
-                    Por {{publicacion.usuario}}. {{publicacion.fecha}}
+</div>
+<div class="container mt-4">
+    <h2>Publicaciones relacionadas</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4" style="margin-top: 10px;">
+        {% for publicacion in publicacion_list %}
+        <section>
+            <div class="container">
+                <div class="card mb-3">
+                    <div class="card-body">
+                    <h5 class="card-title">{{publicacion.titulo}}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary text-end">Sobre {{publicacion.profesor}}</h6>
+                    <p class="card-text">{{publicacion.comentario}}</p>
+                    </div>
+                    <div class="card-footer text-body-secondary text-end">
+                        Por {{publicacion.usuario}}. {{publicacion.fecha}}
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    {% endfor %}
+        </section>
+        {% endfor %}
+    </div>
+</div>
 {% endblock content %}
